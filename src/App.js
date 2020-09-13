@@ -101,17 +101,41 @@ function App() {
       return `${option.property}(${option.value}${option.unit})`;
     });
 
-    return { filter: filters.join(' ') };
+    return filters.join(' ');
   };
 
-  const handleUploadImage = (e) => {
-    setUploadedImage(e.target.files[0]);
-    console.log(e.target.files[0]);
+  const handleUploadImage = (file) => {
+    if (!file) {
+      setUploadedImage('');
+      return;
+    }
+
+    convertToImage(file).then((dataUri) => {
+      setUploadedImage(dataUri);
+    });
   };
+
+  const convertToImage = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        resolve(event.target.result);
+      };
+      reader.readAsDataURL(file);
+    });
 
   return (
     <div className='container'>
-      <div className='main-image' style={getImageStyle()}></div>
+      <div
+        className='main-image'
+        style={{
+          background: uploadedImage
+            ? `url(${uploadedImage}) top center no-repeat`
+            : 'url(https://pixabay.com/get/57e8d7414c51aa14f6da8c7dda79367e1d3adde451546c48702672dd924ec258bb_1280.jpg) top center no-repeat',
+          filter: getImageStyle(),
+        }}
+      ></div>
+
       <div className='sidebar'>
         {options.map((option, index) => (
           <SidebarItem
@@ -130,7 +154,7 @@ function App() {
             type='file'
             hidden
             ref={uploadImage}
-            onChange={handleUploadImage}
+            onChange={(e) => handleUploadImage(e.target.files[0] || null)}
           />
           <input
             id='buttonid'
