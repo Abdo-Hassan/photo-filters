@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Slider from './components/Slider';
 import SidebarItem from './components/SidebarItem';
 import './App.css';
@@ -77,9 +77,11 @@ const DEFAULT_OPTIONS = [
 ];
 
 function App() {
+  const [uploadedImage, setUploadedImage] = useState(null);
   const [selectedOptionIndex, setSelectedOptionIndex] = useState(0);
   const [options, setOptions] = useState(DEFAULT_OPTIONS);
   const selectedOption = options[selectedOptionIndex];
+  const uploadImage = useRef();
 
   const handleChange = ({ target }) => {
     setOptions((prevOptions) => {
@@ -102,6 +104,11 @@ function App() {
     return { filter: filters.join(' ') };
   };
 
+  const handleUploadImage = (e) => {
+    setUploadedImage(e.target.files[0]);
+    console.log(e.target.files[0]);
+  };
+
   return (
     <div className='container'>
       <div className='main-image' style={getImageStyle()}></div>
@@ -118,6 +125,20 @@ function App() {
           <button className='reset' onClick={handleReset}>
             Reset
           </button>
+          <input
+            id='fileid'
+            type='file'
+            hidden
+            ref={uploadImage}
+            onChange={handleUploadImage}
+          />
+          <input
+            id='buttonid'
+            type='button'
+            value='Upload Image'
+            className='upload-image'
+            onClick={() => uploadImage.current.click()}
+          />
         </div>
       </div>
       <Slider
