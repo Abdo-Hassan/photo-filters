@@ -90,6 +90,10 @@ function App() {
     });
   };
 
+  const handleReset = () => {
+    setOptions(DEFAULT_OPTIONS);
+  };
+
   const getImageStyle = () => {
     const filters = options.map((option) => {
       return `${option.property}(${option.value}${option.unit})`;
@@ -110,6 +114,11 @@ function App() {
             handleClick={() => setSelectedOptionIndex(index)}
           />
         ))}
+        <div className='settings'>
+          <button className='reset' onClick={handleReset}>
+            Reset
+          </button>
+        </div>
       </div>
       <Slider
         min={selectedOption.range.min}

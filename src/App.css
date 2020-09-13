@@ -49,6 +49,27 @@ body {
   align-items: stretch;
 }
 
+.sidebar .settings .reset {
+  width: 100%;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: #e94560;
+  color: #fff;
+  padding: 20px 30px;
+
+}
+
+.sidebar .settings {
+  margin-top: 70px;
+}
+
+.sidebar .settings .reset:hover {
+  background-color: #c77381;
+}
+
+.sidebar .settings .upload-image {}
+
 .sidebar-item {
   position: relative;
   cursor: pointer;
