@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import Slider from './components/Slider';
 import SidebarItem from './components/SidebarItem';
 import './App.css';
+import SettingButtons from './components/SettingButtons';
 
 const DEFAULT_OPTIONS = [
   {
@@ -106,7 +107,7 @@ function App() {
 
   const handleUploadImage = (file) => {
     if (!file) {
-      setUploadedImage('');
+      setUploadedImage(uploadedImage);
       return;
     }
 
@@ -131,7 +132,7 @@ function App() {
         style={{
           background: uploadedImage
             ? `url(${uploadedImage}) top center no-repeat`
-            : 'url(https://pixabay.com/get/57e8d7414c51aa14f6da8c7dda79367e1d3adde451546c48702672dd924ec258bb_1280.jpg) top center no-repeat',
+            : 'url(https://pixabay.com/get/57e9d0434e52ae14f6da8c7dda79367e1d3adde451546c48702672dd904fc051b8_1280.jpg) top center no-repeat',
           filter: getImageStyle(),
         }}
       ></div>
@@ -145,25 +146,11 @@ function App() {
             handleClick={() => setSelectedOptionIndex(index)}
           />
         ))}
-        <div className='settings'>
-          <button className='reset' onClick={handleReset}>
-            Reset
-          </button>
-          <input
-            id='fileid'
-            type='file'
-            hidden
-            ref={uploadImage}
-            onChange={(e) => handleUploadImage(e.target.files[0] || null)}
-          />
-          <input
-            id='buttonid'
-            type='button'
-            value='Upload Image'
-            className='upload-image'
-            onClick={() => uploadImage.current.click()}
-          />
-        </div>
+        <SettingButtons
+          handleReset={handleReset}
+          handleUploadImage={handleUploadImage}
+          uploadImage={uploadImage}
+        />
       </div>
       <Slider
         min={selectedOption.range.min}
