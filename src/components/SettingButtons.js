@@ -20,7 +20,6 @@ const SettingButtons = ({ handleReset, handleUploadImage, uploadImage }) => {
         className='upload-image'
         onClick={() => uploadImage.current.click()}
       />
-      <button className='download-image'>Download</button>
     </div>
   );
 };
