@@ -32,7 +32,7 @@ body {
 
 .main-image {
   grid-area: image;
-  background: url('https://pixabay.com/get/57e9d0434e52ae14f6da8c7dda79367e1d3adde451546c48702672dd904fc051b8_1280.jpg') top center no-repeat;
+  background: url('./assets/images/image.jpg') top center no-repeat;
   background-size: contain !important;
   margin: 30px auto;
   width: 100%;

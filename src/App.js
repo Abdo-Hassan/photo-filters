@@ -1,8 +1,9 @@
 import React, { useState, useRef } from 'react';
 import Slider from './components/Slider';
 import SidebarItem from './components/SidebarItem';
-import './App.css';
 import SettingButtons from './components/SettingButtons';
+import Image from './assets/images/image.jpg';
+import './App.css';
 
 const DEFAULT_OPTIONS = [
   {
@@ -132,7 +133,7 @@ function App() {
         style={{
           background: uploadedImage
             ? `url(${uploadedImage}) top center no-repeat`
-            : 'url(https://pixabay.com/get/57e9d0434e52ae14f6da8c7dda79367e1d3adde451546c48702672dd904fc051b8_1280.jpg) top center no-repeat',
+            : `url(${Image}) top center no-repeat`,
           filter: getImageStyle(),
         }}
       ></div>
